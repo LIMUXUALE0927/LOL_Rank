@@ -1,7 +1,10 @@
+import streamlit as st
 from riotwatcher import LolWatcher, ApiError
 import pandas as pd
 
-my_api = 'RGAPI-a115e04f-822e-429f-94ee-d8a02724df5c'
+st.title('韩服分数查询程序')
+api = st.text_input('请输入Riot API KEY:')
+my_api = api
 
 lol_watcher = LolWatcher(my_api)
 region = 'kr'
@@ -29,4 +32,4 @@ for name in namelist:
     data = lol_watcher.league.by_summoner(region, summoner_id)
     stats = stats.append(data, ignore_index=True)
 
-print(stats[['summonerName', 'tier', 'rank', 'leaguePoints']])
+st.table(stats[['summonerName', 'tier', 'rank', 'leaguePoints']])
