@@ -21,9 +21,14 @@ puuid = summoner['puuid']
 # 提取matchlist
 matchlist = lol_watcher.match.matchlist_by_puuid(region='asia', puuid=puuid, type='ranked', count=count_num)
 
+@st.cache
+def get_time_stamp(matchid):
+    return lol_watcher.match.by_id('asia', matchid)['info']['gameEndTimestamp']
+
+
 list = []
-for i in matchlist:
-    list.append(lol_watcher.match.by_id('asia', i)['info']['gameEndTimestamp'])
+for matchid in matchlist:
+    list.append(get_time_stamp(matchid))
 
 # 把UNIX时间戳转换成datetime
 
