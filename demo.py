@@ -40,4 +40,8 @@ for i in list:
 
 time = pd.DataFrame(time, columns = ['Count'])
 
-st.table(time['Count'].value_counts().sort_index(ascending=False))
+df = time['Count'].value_counts().sort_index(ascending=False)
+
+df.index.name = 'Date'
+
+st.table(df)
