@@ -3,10 +3,8 @@ from riotwatcher import LolWatcher, ApiError
 import pandas as pd
 
 st.title('韩服分数查询程序')
-api = st.text_input('请输入Riot API KEY:')
-my_api = api
 
-lol_watcher = LolWatcher(my_api)
+lol_watcher = LolWatcher(st.secrets["my_api"])
 region = 'kr'
 
 namelist = (
