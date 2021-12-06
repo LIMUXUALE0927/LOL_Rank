@@ -44,4 +44,4 @@ df = time['Count'].value_counts().sort_index(ascending=False)
 
 df.index.name = 'Date'
 
-st.dataframe(df)
+st.table(df.reset_index())
