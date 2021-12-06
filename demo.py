@@ -21,7 +21,7 @@ puuid = summoner['puuid']
 # 提取matchlist
 matchlist = lol_watcher.match.matchlist_by_puuid(region='asia', puuid=puuid, type='ranked', count=count_num)
 
-@st.cache
+@st.cache(suppress_st_warning=True)
 def get_time_stamp(matchid):
     return lol_watcher.match.by_id('asia', matchid)['info']['gameEndTimestamp']
 
