@@ -5,6 +5,7 @@ from riotwatcher import LolWatcher, ApiError
 
 st.title('选手韩服Rank查询程序')
 summoner_name = st.text_input('请输入韩服ID')
+count_num = st.slider('选择获取的排位场数:', 0, 100, 50)
 
 # 创建一个lol_watcher对象
 lol_watcher = LolWatcher(st.secrets["my_api"])
@@ -18,7 +19,6 @@ summoner = lol_watcher.summoner.by_name(region, summoner_name)
 puuid = summoner['puuid']
 
 # 提取matchlist
-count_num = st.slider('选择获取的排位场数:', 0, 100, 50)
 matchlist = lol_watcher.match.matchlist_by_puuid(region='asia', puuid=puuid, type='ranked', count=count_num)
 
 list = []
