@@ -4,10 +4,7 @@ import pandas as pd
 from riotwatcher import LolWatcher, ApiError
 
 st.title('韩服查询程序')
-api = st.text_input('请输入Riot API KEY:')
 summoner_name = st.text_input('请输入韩服ID')
-
-my_api = api
 
 # 创建一个lol_watcher对象
 lol_watcher = LolWatcher(my_api)
