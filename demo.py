@@ -7,7 +7,7 @@ st.title('韩服查询程序')
 summoner_name = st.text_input('请输入韩服ID')
 
 # 创建一个lol_watcher对象
-lol_watcher = LolWatcher(my_api)
+lol_watcher = LolWatcher(st.secrets["my_api"])
 
 # 玩家的信息
 region = 'kr' # Riot API开发文档里有写到各个服务器的region缩写
