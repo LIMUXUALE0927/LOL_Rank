@@ -7,22 +7,11 @@ st.title('韩服分数查询程序')
 lol_watcher = LolWatcher(st.secrets["my_api"])
 region = 'kr'
 
-namelist = (
-'푹 쉬면서 해요', 'asdzxvc',
-'가을의북',
-'bilibligaming',
-'Kiss myths',
-'98kmn', '고독 한 사람', 'swfzyqtx',
-'98kiw', 'apolio', 'meimioo',
-'yang zhi bu ou', 'Anni',
-'98kcfq', 'so sorry mid gap',
-'main actor I', 'not my wrong',
-'yue xiang yue qi',
-'aoeiuU', 'wd tongchu', '1xn fans',
-'ZhongYeSanJiu', 'MingRiNai', 'Ruizu',
-'xgaozzz',
-'suxiaoqiang', 'suxiaoqiang2'
-)
+txt = st.text_area('IDs to analyze')
+
+namelist = txt.split(',')
+namelist = [i.strip() for i in namelist]
+namelist = [i.replace('\xa0', ' ') for i in namelist]
 
 stats = pd.DataFrame()
 for name in namelist:
