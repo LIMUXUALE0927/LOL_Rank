@@ -7,7 +7,11 @@ st.title('韩服分数查询程序')
 lol_watcher = LolWatcher(st.secrets["my_api"])
 region = 'kr'
 
-txt = st.text_area('IDs to analyze')
+txt = st.text_area('IDs to analyze',
+                   '''
+BRO Morgan, KT Harp, Lehends, IgNar
+'''
+                   )
 
 namelist = txt.split(',')
 namelist = [i.strip() for i in namelist]
