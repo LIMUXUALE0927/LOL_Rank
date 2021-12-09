@@ -3,6 +3,7 @@ from riotwatcher import LolWatcher, ApiError
 import pandas as pd
 
 st.title('韩服分数查询程序')
+st.write('在下方文本框中输入要查询的韩服ID，ID之间用英文逗号分隔，最后一个ID之后不要加逗号')
 
 lol_watcher = LolWatcher(st.secrets["my_api"])
 region = 'kr'
