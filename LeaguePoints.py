@@ -9,7 +9,7 @@ region = 'kr'
 
 txt = st.text_area('IDs to analyze',
                    '''
-BRO Morgan, KT Harp, Lehends, IgNar
+BRO Morgan, KT Harp, chenzebin, MIDGOD 12
 '''
                    )
 
