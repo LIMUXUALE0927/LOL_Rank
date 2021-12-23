@@ -20,8 +20,11 @@ namelist = [i.replace('\xa0', ' ') for i in namelist]
 
 stats = pd.DataFrame()
 for name in namelist:
-    summoner_id = lol_watcher.summoner.by_name(region, name)['id']
-    data = lol_watcher.league.by_summoner(region, summoner_id)
-    stats = stats.append(data, ignore_index=True)
+    try:
+        summoner_id = lol_watcher.summoner.by_name(region, name)['id']
+        data = lol_watcher.league.by_summoner(region, summoner_id)
+        stats = stats.append(data, ignore_index=True)
+    except:
+        continue
 
 st.table(stats[['summonerName', 'tier', 'rank', 'leaguePoints']])
