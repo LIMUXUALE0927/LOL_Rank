@@ -75,7 +75,7 @@ def count_rank(summoner_name):
     puuid = summoner['puuid']
     matchlist = lol_watcher.match.matchlist_by_puuid(region='asia', puuid=puuid, type='ranked',
                                                      start_time=start, end_time=end)
-    print(summoner_name, ' ', len(matchlist))
+    st.write(summoner_name, ' ', len(matchlist))
 
 
 for i in namelist:
