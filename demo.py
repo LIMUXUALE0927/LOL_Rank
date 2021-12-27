@@ -52,34 +52,3 @@ df = time['Count'].value_counts().sort_index(ascending=False)
 df.index.name = 'Date'
 
 st.table(df.reset_index())
-
-st.title('选手韩服Rank批量查询程序')
-today = datetime.today().date()
-oneday = timedelta(days=1)
-yesterday = today - oneday
-
-d = st.date_input(
-    "请选择要查询的时间段：",
-    (yesterday, today))
-
-start = d[0].strftime('%Y-%m-%d')
-end = d[1].strftime('%Y-%m-%d')
-
-namelist = str(st.text_area('IDs:')).split(',')
-namelist = [i.strip() for i in namelist]
-namelist = [i.replace('\xa0', ' ') for i in namelist]
-
-
-def count_rank(summoner_name):
-    summoner = lol_watcher.summoner.by_name(region, summoner_name)
-    puuid = summoner['puuid']
-    matchlist = lol_watcher.match.matchlist_by_puuid(region='asia', puuid=puuid, type='ranked',
-                                                     start_time=start, end_time=end)
-    st.write(summoner_name, ' ', len(matchlist))
-
-
-for i in namelist:
-    try:
-        count_rank(i)
-    except:
-        continue
