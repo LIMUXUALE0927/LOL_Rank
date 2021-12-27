@@ -14,46 +14,44 @@ lol_watcher = LolWatcher(st.secrets["my_api"])
 # 玩家的信息
 region = 'kr'  # Riot API开发文档里有写到各个服务器的region缩写
 
-try:
-    # 创建一个lol_watcher下的summoner对象
-    summoner = lol_watcher.summoner.by_name(region, summoner_name)
+# 创建一个lol_watcher下的summoner对象
+summoner = lol_watcher.summoner.by_name(region, summoner_name)
 
-    puuid = summoner['puuid']
+puuid = summoner['puuid']
 
-    # 提取matchlist
-    matchlist = lol_watcher.match.matchlist_by_puuid(region='asia', puuid=puuid, type='ranked', count=count_num)
-
-
-    @st.cache(show_spinner=False, suppress_st_warning=True)
-    def get_time_stamp(matchid):
-        return lol_watcher.match.by_id('asia', matchid)['info']['gameEndTimestamp']
+# 提取matchlist
+matchlist = lol_watcher.match.matchlist_by_puuid(region='asia', puuid=puuid, type='ranked', count=count_num)
 
 
-    list = []
-    for matchid in matchlist:
-        list.append(get_time_stamp(matchid))
+@st.cache(show_spinner=False, suppress_st_warning=True)
+def get_time_stamp(matchid):
+    return lol_watcher.match.by_id('asia', matchid)['info']['gameEndTimestamp']
 
 
-    # 把UNIX时间戳转换成datetime
+list = []
+for matchid in matchlist:
+    list.append(get_time_stamp(matchid))
 
-    def timestamp_to_strtime(timestamp):
-        # local_str_time = datetime.fromtimestamp(timestamp / 1000.0).strftime('%Y-%m-%d %H:%M')
-        local_str_time = datetime.fromtimestamp(timestamp / 1000.0).strftime('%Y-%m-%d')
-        return local_str_time
-except:
-    continue
 
-    time = []
-    for i in list:
-        time.append(timestamp_to_strtime(i))
+# 把UNIX时间戳转换成datetime
 
-    time = pd.DataFrame(time, columns=['Count'])
+def timestamp_to_strtime(timestamp):
+    # local_str_time = datetime.fromtimestamp(timestamp / 1000.0).strftime('%Y-%m-%d %H:%M')
+    local_str_time = datetime.fromtimestamp(timestamp / 1000.0).strftime('%Y-%m-%d')
+    return local_str_time
 
-    df = time['Count'].value_counts().sort_index(ascending=False)
 
-    df.index.name = 'Date'
+time = []
+for i in list:
+    time.append(timestamp_to_strtime(i))
 
-    st.table(df.reset_index())
+time = pd.DataFrame(time, columns=['Count'])
+
+df = time['Count'].value_counts().sort_index(ascending=False)
+
+df.index.name = 'Date'
+
+st.table(df.reset_index())
 
 st.title('选手韩服Rank批量查询程序')
 today = datetime.today().date()
