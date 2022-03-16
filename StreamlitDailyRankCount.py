@@ -39,4 +39,4 @@ for i in namelist:
     except:
         continue
 
-st.dataframe(pd.DataFrame(list, columns=['ID', '排位场数']))
+st.table(pd.DataFrame(list, columns=['ID', '排位场数']))
