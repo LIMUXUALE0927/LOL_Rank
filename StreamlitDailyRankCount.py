@@ -5,7 +5,7 @@ import pandas as pd
 
 st.title('韩服每日排位查询程序')
 st.markdown(
-    '在下方文本框粘贴选手ID。可直接从腾讯文档中复制选手韩服ID列表。导出的结果为每个ID从昨日中午12:00到今日中午12:00的排位场数。')
+    '在下方文本框粘贴选手ID。可直接从腾讯文档中复制选手韩服ID列表。导出的结果为每个ID从昨日中午12:00到今日中午12:00的排位场数。如有疑问请咨询小耗子。')
 
 oneday = timedelta(days=1)
 today = datetime.today().date().isoformat() + ' 12:00'
